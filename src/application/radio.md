@@ -131,10 +131,147 @@ input[type="radio"] {
     height: 1.15em;
     border: 0.15em solid currentColor;
     border-radius: 50%;
+    transform: translateY(-0.075em);
 }
 ```
 在这里，我们使用到了一个`currentColor`属性值，这个值请参考[基础-颜色](../base/color.md)部分。
 
-### 对齐`label`和`input`
+在对齐`label`的text和`input`时，我们使用了`transform: translateY`的属性，之所以没有使用`grid`中的`align-items: center`,因为当text过长，最终导致换行时，`input`和文本就无法对齐，而`transform: translate`就可以同时保证单行和多行的对齐。
 
-[//]: # (todo: 添加更多笔记)
+### 为`input`添加选中样式
+
+先来看代码：
+```css
+input[type="radio"] {
+    /* ...existing styles */
+    
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+```
+
+我们使用`::bofore`伪元素来为`input`添加选择样式。其中，`height`和`width`选择为合适大小，`border-radius`设置为圆。这里需要注意的2点是：
+
+* 我们使用了`transform:scale(0)`来表示没有选中的状态，然后配合`transtion`可以实现动画，再配置`transform: scale(1)`来显示选择时的效果。
+* 我们使用了`box-shadow`而不是`background-color`来显示选中时的颜色，因为确保在打印的时候，可以显示选中状态。
+
+### 高亮对比度和`focus`状态
+
+```css
+input[type="radio"]::before {
+    /* Window High Contract Mode */
+    background-color: CanvasText;
+}
+
+input[type="radio"]:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+}
+```
+
+在这里，我们使用了`CanvasText`来表示在高对比度时的背景色和`outline`属性表示聚焦状态。
+
+## 实验性：使用`:focus-within`来给`label`设置选择状态
+
+```css
+.form-control:focus-within {
+    color: var(--form-control-color);
+}
+```
+
+## 完整代码
+
+最后，让我们来看一下完整代码：
+
+html结构
+```html
+<label class="form-control">
+    <input type="radio" name="radio">
+    First Radio
+</label>
+
+<label class="form-control">
+    <input type="radio" name="radio">
+    Second Radio
+</label>
+```
+
+css样式代码：
+```css
+:root {
+    --form-control-color: green;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.form-control {
+    display: grid;
+    grid-template-columns: 1.5em auto;
+    gap: 0.5em;
+    font-family: monospace;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+.form-control + .form-control {
+    margin-top: 1em;
+}
+
+.form-control:focus-within {
+    color: var(--form-control-color);
+}
+
+input[type="radio"] {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    height: 1.15em;
+    width: 1.15em;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+
+input[type="radio"]::before {
+    content:'';
+    width: 0.65em;
+    height: 0.65em;
+    border-radius: 50%;
+    box-shadow: inset 1em 1em var(--form-control-color);
+    transform: scale(0);
+    transition: transform 120ms ease-in-out;
+    background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="radio"]:focus {
+    outline: max(2px,0.15em) solid currentColor;
+    outline-offset: max(2px,0.15em);
+}
+```
