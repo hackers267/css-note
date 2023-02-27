@@ -116,4 +116,9 @@ input[type="checkbox"]:disabled {
 
 自定义`Checkbox`按钮和自定义`Radio`按钮的主要不同之处在于，选择状态时的样式和添加了一个`disabled`状态样式。
 
-[//]: # (todo: 添加和`Radio`中的不同部分)
+在自定义`Checkbox`时，使用了`clip-path`来描述选中时的状态，巧妙的使用`clip-path`可以让我们使用css实现一部分图形而不必要使用图片，这里还使用了`transform-origin`来指定动画从左下角开始而不是从默认的中心开始，这对于*对勾*的选择框来说更加合适。
+
+对`Checkbox`添加`disabled`状态时，有两点需要关注：
+
+* 使用`cursor: not-allowed`对`Checkbox`的点击进行了禁止
+* 使用颜色对不可用状态进行了显示，其中把`--form-control-color`变量重新赋值为`--form-control-disabled`对选中状态的颜色进行了设置
