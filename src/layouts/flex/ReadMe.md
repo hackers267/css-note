@@ -32,3 +32,4 @@ Flex属性可以分为两组：空间分配属性 和 对齐属性 。用于分�
 * place-content：它是 justify-content 和 align-content 的简写属性。
 
 * [对齐属性](./align.md)
+* [空间分配属性](./space.md)
