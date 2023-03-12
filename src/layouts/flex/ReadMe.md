@@ -31,34 +31,4 @@ Flex属性可以分为两组：空间分配属性 和 对齐属性 。用于分�
 * align-content：沿 Flex 容器的侧轴分配 Flex 容器的剩余空间；
 * place-content：它是 justify-content 和 align-content 的简写属性。
 
-用于在 Flexbox 布局中对齐的属性如下：
-
-* align-self：沿 Flex 容器侧轴对齐单个 Flex 项目；
-* align-items：将所有 Flex 项目作为一个组，沿 Flex 容器侧轴对齐。
-
-## justify-content属性
-
-justify-content 取值为 flex-start 、flex-end 和 center 时，相当于：
-
-* flex-start ：主轴起点对齐（ltr 模式是左对齐）；
-* flex-end ：主轴终点对齐（ltr 模式是右对齐）；
-* center ：主轴居中对齐。
-
-justify-content 属性设置为 space-around 、space-between 或 space-evenly ，在 Flex 项目之间分配 Flex 容器的剩余空间。
-
-* space-between 会让行上第一个 Flex 项目的起始边缘与 Flex 容器主轴起点相吻合，行上最后一个 Flex 项目的结束边缘与 Flex 容器主轴终点相吻合，其它相邻 Flex 项目之间间距相等。当 Flex 容器中只有一个 Flex 项目时，其表现行为和 flex-start 等同。
-* space-around 会让行上第一个 Flex 项目的起始边缘与 Flex 容器主轴起点间距，和行上最后一个 Flex 项目的结束边缘与 Flex 容器主轴终点间距相等，并且等于其他相邻两个 Flex 项目之间间距的二分之一。当 Flex 容器中只有一个 Flex 项目时，其表现行为和 center 等同。
-* space-evenly 会让行上第一个 Flex 项目的起始边缘与 Flex 容器主轴起点间距，和最后一个 Flex 项目的结束边缘与 Flex 容器主轴终点间距相等，并且等于其他相邻两个 Flex 项目之间间距。当 Flex 容器中只有一个 Flex 项目时，其表现行为和 center 等同。
-
-如果 Flex 容器没有额外的剩余空间，或者说剩余空间为负值时， justify-content 属性的值表现形式:
-
-* flex-start 会让 Flex 项目在 Flex 容器主轴终点处溢出 ；
-* flex-end 会让 Flex 项目在 Flex 容器主轴起点处溢出；
-* center 会让 Flex 项目在 Flex 容器两端溢出；
-* space-between 和 flex-start 相同；
-* space-around 和 center 相同；
-* space-evenly 和 center 相同；
-* start 和 flex-start 相同；
-* end 和 flex-end 相同。
-
-
+* [对齐属性](./align.md)
